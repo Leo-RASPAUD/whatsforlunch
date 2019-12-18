@@ -1,8 +1,9 @@
-import React, { useReducer } from "react";
-import ReactDOM from "react-dom";
-import Context, { initialState } from "./context";
-import reducer from "./reducer";
-import Routes from "./Routes";
+import React, { useReducer } from 'react';
+import ReactDOM from 'react-dom';
+import Context, { initialState } from './context';
+import reducer from './reducer';
+import Routes from './Routes';
+import './styles.css';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,5 +15,5 @@ const App = () => {
   );
 };
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);

@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
  0% {
@@ -21,7 +21,7 @@ const Container = styled.span`
 const Spinner = styled.span`
   animation: ${rotate} 1s linear infinite;
   border-radius: 10%;
-  border: 2px solid coral;
+  border: 2px solid white;
   box-sizing: border-box;
   display: block;
   height: 24px;

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
   text-align: left;
@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const Label = styled.div`
   font-style: italic;
-  color: coral;
+  color: white;
 `;
 
 export default ({ label, value }) => {
