@@ -19,9 +19,12 @@ const Container = styled.div`
 `;
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  padding: 16px;
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 `;
 
 export default () => {
@@ -31,8 +34,8 @@ export default () => {
   } = useContext(context);
   const [loading, setLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [filter, setFilter] = useState('thai');
-  const [radius, setRadius] = useState('200');
+  const [filter, setFilter] = useState('Mexican');
+  const [radius, setRadius] = useState('1500');
 
   const getPlaceDetails = async placeId => {
     dispatch({ type: actions.setRestaurant, payload: null });
