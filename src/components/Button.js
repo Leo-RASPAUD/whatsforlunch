@@ -3,12 +3,13 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   background: none;
-  border: 2px solid white;
-  padding: 8px;
+  border: 2px solid currentColor;
+  padding: 16px;
   font-size: 24px;
   border-radius: 4px;
   outline: none;
-  color: white;
+  margin: 16px;
+  color: currentColor;
 `;
 
 export default ({ onClick, children }) => {

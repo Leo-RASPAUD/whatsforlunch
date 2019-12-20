@@ -5,21 +5,22 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  padding: 8px 0;
-  font-size: 16px;
+  padding: 16px 0;
 `;
 
 const Label = styled.label`
   margin-bottom: 4px;
   font-style: italic;
+  font-size: inherit;
 `;
 
 const Input = styled.input`
-  border: 2px solid white;
+  border: 2px solid currentColor;
+  background: transparent;
   border-radius: 4px;
   padding: 8px;
-  font-size: 16px;
-  color: black;
+  color: currentColor;
+  font-size: inherit;
 `;
 
 export default ({ label, onChange, defaultValue }) => {

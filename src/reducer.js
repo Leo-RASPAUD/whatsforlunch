@@ -1,8 +1,8 @@
 export const actions = {
-  setCoordinates: "setCoordinates",
-  setError: "setError",
-  setRestaurants: "setRestaurants",
-  setRestaurant: "setRestaurant"
+  setCoordinates: 'setCoordinates',
+  setError: 'setError',
+  setRestaurants: 'setRestaurants',
+  setRestaurant: 'setRestaurant',
 };
 
 export default (state, { payload, type }) => {
@@ -10,25 +10,25 @@ export default (state, { payload, type }) => {
     case actions.setCoordinates: {
       return {
         ...state,
-        coordinates: payload
+        coordinates: payload,
       };
     }
     case actions.setRestaurants: {
       return {
         ...state,
-        restaurants: payload
+        restaurants: payload,
       };
     }
     case actions.setRestaurant: {
       return {
         ...state,
-        restaurant: payload
+        restaurant: payload,
       };
     }
     case actions.setError: {
       return {
         ...state,
-        errorMessage: payload
+        errorMessage: payload,
       };
     }
     default:

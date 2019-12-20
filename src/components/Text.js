@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const Label = styled.div`
   font-style: italic;
-  color: white;
+  color: currentColor;
 `;
 
 export default ({ label, value }) => {

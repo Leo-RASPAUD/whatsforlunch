@@ -1,10 +1,10 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export const initialState = {
   restaurants: [],
   restaurant: null,
   coordinates: null,
-  errorMessage: ""
+  errorMessage: '',
 };
 
 const context = createContext(initialState);

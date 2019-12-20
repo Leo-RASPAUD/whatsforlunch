@@ -21,7 +21,7 @@ const Container = styled.span`
 const Spinner = styled.span`
   animation: ${rotate} 1s linear infinite;
   border-radius: 10%;
-  border: 2px solid white;
+  border: 2px solid currentColor;
   box-sizing: border-box;
   display: block;
   height: 24px;
