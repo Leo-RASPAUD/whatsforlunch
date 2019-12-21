@@ -13,9 +13,10 @@ const rotate = keyframes`
 const Container = styled.span`
   position: relative;
   display: inline-block;
-  height: 16px;
-  width: 16px;
-  margin: 16px;
+  height: 32px;
+  width: 32px;
+  margin-top: 8px;
+  margin-left: -32px;
 `;
 
 const Spinner = styled.span`
@@ -24,10 +25,10 @@ const Spinner = styled.span`
   border: 2px solid currentColor;
   box-sizing: border-box;
   display: block;
-  height: 24px;
+  height: 64px;
   position: absolute;
   top: 0;
-  width: 24px;
+  width: 64px;
 `;
 
 export default () => {

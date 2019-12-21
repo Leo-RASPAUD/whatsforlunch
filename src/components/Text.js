@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import Title from './Title';
 
 const Container = styled.div`
   text-align: left;
   margin: 16px;
 `;
 
-const Label = styled.div`
-  font-style: italic;
-  color: currentColor;
-`;
-
 export default ({ label, value }) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Title>{label}</Title>
       <div>{value}</div>
     </Container>
   );

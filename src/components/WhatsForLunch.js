@@ -9,6 +9,7 @@ import Error from './Error';
 import OpeningHours from './OpeningHours';
 import Reviews from './Reviews';
 import Price from './Price';
+import Title from './Title';
 import ShowPrice from './ShowPrice';
 import baseUrl from '../constants/url';
 import getRandomItem from '../utils/getRandomItem';
@@ -18,7 +19,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   min-height: 100vh;
   background-color: transparent;
-  text-align: left;
+  text-align: center;
   padding: 16px;
 `;
 
@@ -33,6 +34,11 @@ const InputContainer = styled.div`
 
 const Link = styled.a`
   color: currentColor;
+`;
+
+const PriceContainer = styled.div`
+  margin: 16px;
+  text-align: left;
 `;
 
 export default () => {
@@ -121,8 +127,8 @@ export default () => {
       <SearchContainer expanded={searchExpanded} setSearchExpanded={setSearchExpanded}>
         <InputContainer>
           <Input label="Type" onChange={event => setFilter(event.target.value)} defaultValue={filter} />
-          <Input label="Radius (in meters)" onChange={event => setRadius(event.target.value)} defaultValue={radius} />
           <Price setMaxPrice={setMaxPrice} maxPrice={maxPrice} name="maxPrice" />
+          <Input label="Radius (in meters)" onChange={event => setRadius(event.target.value)} defaultValue={radius} />
         </InputContainer>
         <Button
           variant="contained"
@@ -140,26 +146,25 @@ export default () => {
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'baseline',
               justifyContent: 'space-between',
             }}
           >
             <Text label="Name" value={restaurant.name} />
             <Link href={restaurant.url} target="_blank" rel="noopener noreferrer">
-              Details
+              Directions
             </Link>
           </div>
           <Text label="Address" value={restaurant.formatted_address} />
           <Text label="Phone number" value={restaurant.formatted_phone_number} />
-          <Text label="Rating" value={restaurant.rating} />
-          <Text label="Number of ratings" value={restaurant.user_ratings_total} />
-          <OpeningHours openingHours={restaurant.opening_hours} />
-          <div>
-            <div>Price</div>
+          <Text label="Rating" value={`${restaurant.rating}/5 - ${restaurant.user_ratings_total} ratings`} />
+          <PriceContainer>
+            <Title>Price</Title>
             {[1, 2, 3, 4].map(item => (
               <ShowPrice key={item} price={restaurant.price_level} item={item} />
             ))}
-          </div>
+          </PriceContainer>
+          <OpeningHours openingHours={restaurant.opening_hours} />
           <div style={{ marginTop: 16 }}>Reviews</div>
           <Reviews reviews={restaurant.reviews} />
         </div>
