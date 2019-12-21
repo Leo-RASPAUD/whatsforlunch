@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import context from '../context';
 import Progress from './Progress';
 import Input from './Input';
+import SearchContainer from './SearchContainer';
 import Text from './Text';
 import Button from './Button';
 import Error from './Error';
@@ -44,7 +45,7 @@ export default () => {
   const [filter, setFilter] = useState('Mexican');
   const [radius, setRadius] = useState('1500');
   const [maxPrice, setMaxPrice] = useState('3');
-  const [displayFilters, setDisplayFilters] = useState(true);
+  const [searchExpanded, setSearchExpanded] = useState(true);
 
   const getLocation = () => {
     setLoading(true);
@@ -82,6 +83,7 @@ export default () => {
       const json = await result.json();
       dispatch({ type: actions.setRestaurant, payload: json.result });
       setLoading(false);
+      setSearchExpanded(false);
     },
     [dispatch],
   );
@@ -116,21 +118,21 @@ export default () => {
 
   return (
     <Container>
-      {displayFilters && (
+      <SearchContainer expanded={searchExpanded} setSearchExpanded={setSearchExpanded}>
         <InputContainer>
           <Input label="Type" onChange={event => setFilter(event.target.value)} defaultValue={filter} />
           <Input label="Radius (in meters)" onChange={event => setRadius(event.target.value)} defaultValue={radius} />
           <Price setMaxPrice={setMaxPrice} maxPrice={maxPrice} name="maxPrice" />
         </InputContainer>
-      )}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={coordinates ? getRestaurants : getLocation}
-        disabled={!coordinates}
-      >
-        What's for lunch?
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={coordinates ? getRestaurants : getLocation}
+          disabled={!coordinates}
+        >
+          What's for lunch?
+        </Button>
+      </SearchContainer>
       {loading && <Progress />}
       {!loading && noResults && <div>No restaurants found</div>}
       {!loading && restaurant && (
