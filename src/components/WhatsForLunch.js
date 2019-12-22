@@ -99,6 +99,10 @@ export default () => {
   );
 
   const getRestaurants = useCallback(async () => {
+    dispatch({
+      type: actions.setError,
+      payload: null,
+    });
     setNoResults(false);
     setLoading(true);
     dispatch({ type: actions.setRestaurants, payload: [] });
