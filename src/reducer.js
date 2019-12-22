@@ -3,6 +3,7 @@ export const actions = {
   setError: 'setError',
   setRestaurants: 'setRestaurants',
   setRestaurant: 'setRestaurant',
+  toggleNsfw: 'toggleNsfw',
 };
 
 export default (state, { payload, type }) => {
@@ -23,6 +24,12 @@ export default (state, { payload, type }) => {
       return {
         ...state,
         restaurant: payload,
+      };
+    }
+    case actions.toggleNsfw: {
+      return {
+        ...state,
+        nsfw: payload,
       };
     }
     case actions.setError: {

@@ -5,6 +5,8 @@ export const initialState = {
   restaurant: null,
   coordinates: null,
   errorMessage: '',
+  nsfw: false,
+  initialSearch: 'Burgers',
 };
 
 const context = createContext(initialState);

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import context from '../context';
 import Progress from './Progress';
+import ProgressNsfw from './ProgressNsfw';
 import Input from './Input';
 import ExpandContainer from './ExpandContainer';
 import Text from './Text';
@@ -44,11 +45,12 @@ const PriceContainer = styled.div`
 export default () => {
   const {
     dispatch,
-    state: { errorMessage, coordinates, restaurant },
+    state: { errorMessage, coordinates, restaurant, nsfw, initialSearch },
   } = useContext(context);
+
   const [loading, setLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [filter, setFilter] = useState('Burgers');
+  const [filter, setFilter] = useState(initialSearch);
   const [radius, setRadius] = useState('1000');
   const [maxPrice, setMaxPrice] = useState('3');
   const [searchExpanded, setSearchExpanded] = useState(true);
@@ -130,9 +132,17 @@ export default () => {
     <Container>
       <ExpandContainer expanded={searchExpanded} expand={setSearchExpanded} label={'Search'}>
         <InputContainer>
-          <Input label="Type" onChange={event => setFilter(event.target.value)} defaultValue={filter} />
-          <Price setMaxPrice={setMaxPrice} maxPrice={maxPrice} name="maxPrice" />
-          <Input label="Radius (in meters)" onChange={event => setRadius(event.target.value)} defaultValue={radius} />
+          <Input
+            label={nsfw ? 'Who the fuck cares' : 'Type'}
+            onChange={event => setFilter(event.target.value)}
+            defaultValue={filter}
+          />
+          <Price nsfw={nsfw} setMaxPrice={setMaxPrice} maxPrice={maxPrice} name="maxPrice" />
+          <Input
+            label={nsfw ? 'Better be fucking close' : 'Radius (in meters)'}
+            onChange={event => setRadius(event.target.value)}
+            defaultValue={radius}
+          />
         </InputContainer>
         <Button
           variant="contained"
@@ -140,11 +150,11 @@ export default () => {
           onClick={coordinates ? getRestaurants : getLocation}
           disabled={!coordinates}
         >
-          What's for lunch?
+          {nsfw ? 'Get my fucking lunch' : "What's for lunch?"}
         </Button>
       </ExpandContainer>
-      {loading && <Progress />}
-      {!loading && noResults && <div>No restaurants found</div>}
+      {!loading && nsfw ? <ProgressNsfw /> : loading && <Progress />}
+      {!loading && noResults && <div>{nsfw ? 'Fuck' : 'No restaurants found'}</div>}
       {!loading && restaurant && (
         <div>
           <div
