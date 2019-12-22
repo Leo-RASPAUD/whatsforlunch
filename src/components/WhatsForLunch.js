@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import context from '../context';
 import Progress from './Progress';
 import Input from './Input';
-import SearchContainer from './SearchContainer';
+import ExpandContainer from './ExpandContainer';
 import Text from './Text';
 import Button from './Button';
 import Error from './Error';
@@ -33,7 +33,7 @@ const InputContainer = styled.div`
 `;
 
 const Link = styled.a`
-  color: currentColor;
+  color: #e91e63;
 `;
 
 const PriceContainer = styled.div`
@@ -48,10 +48,12 @@ export default () => {
   } = useContext(context);
   const [loading, setLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [filter, setFilter] = useState('Mexican');
-  const [radius, setRadius] = useState('1500');
+  const [filter, setFilter] = useState('Burgers');
+  const [radius, setRadius] = useState('1000');
   const [maxPrice, setMaxPrice] = useState('3');
   const [searchExpanded, setSearchExpanded] = useState(true);
+  const [reviewsExpanded, setReviewsExpanded] = useState(false);
+  const [openingHoursExpanded, setOpeningHoursExpanded] = useState(false);
 
   const getLocation = () => {
     setLoading(true);
@@ -118,13 +120,15 @@ export default () => {
 
   useEffect(() => {
     if (coordinates) {
+      setReviewsExpanded(false);
+      setOpeningHoursExpanded(false);
       getRestaurants();
     }
   }, [coordinates]); // eslint-disable-line
 
   return (
     <Container>
-      <SearchContainer expanded={searchExpanded} setSearchExpanded={setSearchExpanded}>
+      <ExpandContainer expanded={searchExpanded} expand={setSearchExpanded} label={'Search'}>
         <InputContainer>
           <Input label="Type" onChange={event => setFilter(event.target.value)} defaultValue={filter} />
           <Price setMaxPrice={setMaxPrice} maxPrice={maxPrice} name="maxPrice" />
@@ -138,7 +142,7 @@ export default () => {
         >
           What's for lunch?
         </Button>
-      </SearchContainer>
+      </ExpandContainer>
       {loading && <Progress />}
       {!loading && noResults && <div>No restaurants found</div>}
       {!loading && restaurant && (
@@ -164,9 +168,14 @@ export default () => {
               <ShowPrice key={item} price={restaurant.price_level} item={item} />
             ))}
           </PriceContainer>
-          <OpeningHours openingHours={restaurant.opening_hours} />
-          <div style={{ marginTop: 16 }}>Reviews</div>
-          <Reviews reviews={restaurant.reviews} />
+          <Text label="Opened" value={restaurant.opening_hours && restaurant.opening_hours.open_now ? 'Yes' : 'No'} />
+          <ExpandContainer expanded={openingHoursExpanded} expand={setOpeningHoursExpanded} label={'Opening hours'}>
+            <OpeningHours openingHours={restaurant.opening_hours} />
+          </ExpandContainer>
+
+          <ExpandContainer expanded={reviewsExpanded} expand={setReviewsExpanded} label={'Reviews'}>
+            <Reviews reviews={restaurant.reviews} />
+          </ExpandContainer>
         </div>
       )}
       {errorMessage && <Error message={errorMessage} />}

@@ -12,6 +12,7 @@ const Label = styled.label`
   margin-bottom: 4px;
   font-style: italic;
   font-size: inherit;
+  color: #e91e63;
 `;
 
 const Input = styled.input`

@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: ${props => (props.expanded ? (window.innerWidth > 450 ? '250px' : '450px') : '50px')};
+  height: ${props => (props.expanded ? (window.innerWidth > 450 ? '250px' : 'inherit') : '50px')};
   background: ${props => (props.expanded ? 'inherit' : '#262627')};
   overflow: hidden;
-  transition: all 0.15s ease-in-out;
+  transition: background 0.3s ease-in-out;
   color: ${props => (props.expanded ? 'inherit' : '#e8e8e8')};
+  margin-bottom: 16px;
 `;
 
-// opacity: ${props => (props.expanded ? '1' : '0')};
 const ChildrenContainer = styled.div`
-  display: ${props => (props.expanded ? 'block' : 'none')};
+  opacity: ${props => (props.expanded ? '1' : '0')};
 `;
 
 const ChevronContainer = styled.button`
@@ -41,7 +41,7 @@ const Chevron = styled.span`
   color: #808080;
 `;
 
-export default ({ children, expanded, setSearchExpanded }) => {
+export default ({ children, expanded, expand, label }) => {
   return (
     <Container expanded={expanded}>
       <>
@@ -49,11 +49,11 @@ export default ({ children, expanded, setSearchExpanded }) => {
           <ChevronContainer
             onClick={() => {
               if (!expanded) {
-                setSearchExpanded(true);
+                expand(true);
               }
             }}
           >
-            <span>Search</span>
+            <span>{label}</span>
             <Chevron />
           </ChevronContainer>
         )}

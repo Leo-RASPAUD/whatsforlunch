@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   font-style: italic;
-  color: currentColor;
+  color: #e91e63;
 `;
 
 export default ({ children }) => {

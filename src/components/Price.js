@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Title from './Title';
 
 const Input = styled.input`
   display: none;
@@ -32,7 +33,7 @@ export default ({ setMaxPrice, maxPrice, disabled, value, name }) => {
 
   return (
     <div>
-      <div>Max price</div>
+      <Title>Max price</Title>
       <Radio value="1" onChange={setPrice} maxPrice={maxPrice} disabled={disabled} name={name} />
       <Radio value="2" onChange={setPrice} maxPrice={maxPrice} disabled={disabled} name={name} />
       <Radio value="3" onChange={setPrice} maxPrice={maxPrice} disabled={disabled} name={name} />
