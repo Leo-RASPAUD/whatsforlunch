@@ -153,7 +153,7 @@ export default () => {
           {nsfw ? 'Get my fucking lunch' : "What's for lunch?"}
         </Button>
       </ExpandContainer>
-      {!loading && nsfw ? <ProgressNsfw /> : loading && <Progress />}
+      {loading && nsfw ? <ProgressNsfw /> : loading && <Progress />}
       {!loading && noResults && <div>{nsfw ? 'Fuck' : 'No restaurants found'}</div>}
       {!loading && restaurant && (
         <div>
